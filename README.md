@@ -1,25 +1,38 @@
 # nmap_scan
-This script automates the process of running an Nmap scan, then opens the report in Firefox for easy viewing. This is useful to analyze a system's open ports and services.
 
-**How to Use the Script**
+This script automates the process of running an Nmap scan and generating a readable HTML report. The report is then opened in Firefox for easy viewing. This is useful for analyzing a system's open ports, services, and potential vulnerabilities.
 
-1.Save the Script:
+---
 
-Copy the script into a file and save it as **nmap_scan.sh**.
+```bash
 
-2.Make It Executable:
+#!/bin/bash
 
-3.Run the following command in the terminal to make the script executable:
-**chmod +x nmap_scan.sh**
+banner=""" 
+*******************************************************
+                    NMAP SCAN 
+*******************************************************
+Please wait while we generate the scan report in Firefox.
+*******************************************************
+"""
+# Display banner
+echo "$banner"
 
-Run the Script:
+# Set the target and output file names
+TARGET=$1
+XML_OUTPUT="nmapresult.xml"
+HTML_OUTPUT="nmapresult.html"
 
-Provide a target (e.g., an IP address or domain) as an argument:
-**./nmap_scan.sh <target>**
+# Run the Nmap scan and save output to XML
+echo "Running Nmap scan on $TARGET..."
+nmap -sC -sV -oX "$XML_OUTPUT" "$TARGET"
 
-Example:./nmap_scan.sh 192.168.22.15
+# Convert the Nmap XML result to HTML
+echo "Converting XML to HTML..."
+xsltproc /usr/share/nmap/nmap.xsl "$XML_OUTPUT" -o "$HTML_OUTPUT"
 
-View the Report:
-After running, the script will open the generated HTML report in Firefox.
+echo "Conversion complete. HTML file saved as $HTML_OUTPUT"
 
+# Open the HTML report in Firefox
+firefox "$HTML_OUTPUT" &
 
