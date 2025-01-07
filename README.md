@@ -19,4 +19,17 @@ Run the following command to make the script executable:
 
 `./nmap_scan.sh <target>`
 
+# Disclaimer
+
+This script is intended for authorized security assessments only.
+Ensure you have explicit permission to scan any target system before using this tool. Unauthorized scanning may violate laws and regulations, and the user is solely responsible for any misuse of the script. Use it ethically and responsibly.
+
+# Notes
+
+This script simplifies the process of security scanning, making it accessible even for beginners.
+For more information about Nmap, visit [official Nmap website](https://nmap.org/).
+
+
+
+
 
